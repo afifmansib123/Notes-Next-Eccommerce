@@ -1,47 +1,28 @@
+
+
 export const initialstate = {
     cart : {
         cartitems : []
     }
 }
+export const cartfunctionality = (state, action) => {
+    switch(action.type){
+        case "ADDTOCART":
+            const requestitem = action.payload
+            const existincartalready = state.cart.cartitems.find((x)=>x.slug === requestitem.slug)
 
-export const reducerfunction = (state, action) => {
-    switch(action.type){ 
-        case "ADDTOCART" :
-            const reqitem = action.payload
+            const checkcartitems = existincartalready
+            ? state.cart.cartitems.map((item)=>item.slug === existincartalready.slug ? requestitem : item)
+            : [...state.cart.cartitems, requestitem]
 
-            let existitem = false
-            const test = () => {
-                state.cart.cartitems.map((x)=>{
-                    if(x.slug === reqitem.slug){
-                        existitem = true
-                    }else{
-                        existitem = false
-                    }
-                })
-            }
-            test()
-            if(existitem === false){
-                return{
-                    ...state,
-                    cart : {
-                        cartitems : [...state.cart.cartitems, reqitem]
-                    }
-                }
-            }else{
-                return{
-                    ...state,
-                    cart : {
-                        cartitems : state.cart.cartitems.map((x)=>{if(x.slug === reqitem.slug){
-                            return{
-                                ...x,
-                                quantity : x.quantity + 1
-                            }
-                        }})
-                    }
+            return {
+                ...state,
+                cart : {
+                    ...state.cart,
+                    cartitems : checkcartitems,
                 }
             }
-            
-        default:
-            return {state}
+        default : 
+            return state
     }
 }

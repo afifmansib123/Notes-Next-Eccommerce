@@ -2,7 +2,7 @@ import { useRouter } from "next/router"
 import items from "@/utils/data"
 import Image from "next/image"
 import { useReducer } from "react"
-import { reducerfunction, initialstate } from "@/utils/Store"
+import { cartfunctionality, initialstate } from "@/utils/Store"
 
 const singlepage = () => {
     const {query} = useRouter()
@@ -10,15 +10,19 @@ const singlepage = () => {
 
     const found = items.names.find((x)=>x.slug === slug)
 
+    const [state,dispatch] = useReducer(cartfunctionality, initialstate)
 
-    const [state,dispatch] = useReducer(reducerfunction, initialstate)
 
     const addtocart = () => {
-       dispatch({type : "ADDTOCART", payload : found})
+        const itemincartalready = state.cart.cartitems.find((item)=>item.slug === found.slug)
+
+        const requestnewquantity = itemincartalready ? itemincartalready.quantity + 1 : 1
+
+        dispatch({type: "ADDTOCART", payload : {...found, quantity : requestnewquantity }})
     }
 
     const checkcart = () => {
-        alert(`Your cart has ${JSON.stringify(state)}`)
+        alert(`Your cart is ${JSON.stringify(state)}`)
     }
 
     return(
