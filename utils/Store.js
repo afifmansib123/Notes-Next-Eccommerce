@@ -1,28 +1,41 @@
+import { createContext, useReducer } from "react";
 
 
-export const initialstate = {
+//initial cart with an empty string array
+//initial state is an empty object
+const initialstate = {
     cart : {
         cartitems : []
     }
 }
-export const cartfunctionality = (state, action) => {
+
+//reducer function to update cart items
+export const reducer = (state,action) => {
     switch(action.type){
-        case "ADDTOCART":
-            const requestitem = action.payload
-            const existincartalready = state.cart.cartitems.find((x)=>x.slug === requestitem.slug)
+        case "ADD":
+            const newitem = action.payload;
+            const existitem = state.cart.cartitems.find((x)=>x.slug===newitem.slug)
 
-            const checkcartitems = existincartalready
-            ? state.cart.cartitems.map((item)=>item.slug === existincartalready.slug ? requestitem : item)
-            : [...state.cart.cartitems, requestitem]
+            const cartitems = existitem 
+            ? state.cart.cartitems.map((x)=>x.slug === existitem.slug ? newitem : x) //if the item is added to cart already just increase the count
+            : [...state.cart.cartitems, newitem] //else add the item to the cart with the previous state existing
 
-            return {
-                ...state,
-                cart : {
-                    ...state.cart,
-                    cartitems : checkcartitems,
-                }
-            }
-        default : 
+            //have to return it now :
+            return {...state, cart: {...state.cart, cartitems}}
+
+        default:
             return state
     }
 }
+
+//create Store to Provide
+export const Store = createContext()
+
+
+//define what to provide for the context
+export function Storeprovider ({children}){
+    const [state,dispatch] = useReducer(reducer, initialstate) //function and the cart
+    return <Store.Provider value={{state, dispatch}}>{children}</Store.Provider>
+}
+
+//now we will put this in _app.js to cover the whole app with this.

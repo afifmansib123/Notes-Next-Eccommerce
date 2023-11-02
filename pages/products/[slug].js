@@ -1,46 +1,42 @@
-import { useRouter } from "next/router"
 import items from "@/utils/data"
-import Image from "next/image"
-import { useReducer } from "react"
-import { cartfunctionality, initialstate } from "@/utils/Store"
 
-const singlepage = () => {
+
+import { useRouter } from "next/router"
+
+import Image from "next/image"
+import { Store } from "@/utils/Store"
+import { useContext } from "react"
+
+export default function Singles() {
+
     const {query} = useRouter()
     const {slug} = query
 
-    const found = items.names.find((x)=>x.slug === slug)
+    const { state, dispatch } = useContext(Store)
 
-    const [state,dispatch] = useReducer(cartfunctionality, initialstate)
+    const singleproduct = items.names.find((x)=>x.slug === slug)
 
+    const Addtocart = () => {
+        //find the same of this id from the cart and see
+        //if it exists already or not
+        const existitem = state.cart.cartitems.find((x) => x.slug === singleproduct.slug)
+        //if it exists alreday just increase the quantity
+        const quantity = existitem ? existitem.quantity + 1 : 1 //either increase to q+1 or just 1 if it didnt exist before.
 
-    const addtocart = () => {
-        const itemincartalready = state.cart.cartitems.find((item)=>item.slug === found.slug)
+        //now update the cart accordingly.
+        dispatch({ type: "ADD", payload: { ...singleproduct, quantity } }) //only update the quantity property since it is cart 
 
-        const requestnewquantity = itemincartalready ? itemincartalready.quantity + 1 : 1
-
-        dispatch({type: "ADDTOCART", payload : {...found, quantity : requestnewquantity }})
     }
 
-    const checkcart = () => {
-        alert(`Your cart is ${JSON.stringify(state)}`)
-    }
 
-    return(
-        <div>
-        <div  className="flex justify-center">
-        {found.name} is going at {found.price}
-        </div><br/>
+
+    return (
         <div className="flex justify-center">
-        <Image src = {found.image} alt="myimage" height="400" width = "400"></Image>
+            <h1>{singleproduct.name}</h1>
+            <Image src={singleproduct.image} alt="hello" height={500} width={500}></Image>
+            <button style={{color:"red"}} onClick={Addtocart}>add to cart</button>
         </div>
-        <div className="flex justify-center">
-        <button className="flex justify-center" style = {{color : "black", border : "3px solid"}} onClick={addtocart}>Add to Cart</button>
-        </div>
-        <div className="flex justify-center">
-        <button className="flex justify-center" style = {{color : "black", border : "3px solid"}} onClick={checkcart}>CHECK CART</button>
-        </div>
-        </div>
-    )    
+    )
+
+
 }
-
-export default singlepage
