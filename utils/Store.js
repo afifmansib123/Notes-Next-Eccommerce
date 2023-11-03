@@ -22,7 +22,16 @@ export const reducer = (state,action) => {
 
             //have to return it now :
             return {...state, cart: {...state.cart, cartitems}}
-
+        case "DELETE":
+            const reqslug = action.payload
+            console.log(reqslug)
+            console.log(state.cart.cartitems)
+            const newcart = state.cart.cartitems.filter((x)=>x.slug!==reqslug)
+            console.log(newcart)
+            return {...state, cart : {cartitems : newcart} }
+            
+            //console.log(newcart)
+            //return {...state, cart : {...state.cart, }}
         default:
             return state
     }

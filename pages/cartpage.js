@@ -1,5 +1,4 @@
 import { Store } from "@/utils/Store"
-import items from "@/utils/data"
 import { useContext } from "react"
 function cartpage() {
     const { state, dispatch } = useContext(Store)
@@ -19,6 +18,9 @@ function cartpage() {
                        <td>{items.name}</td> 
                        <td>{items.price}</td> 
                        <td>{items.quantity}</td> 
+                       <td><button onClick={()=>{
+                        dispatch({type: "DELETE", payload : items.slug})
+                       }}>(X)</button></td>
                     </tr>))}
         </tbody>
         </table>
