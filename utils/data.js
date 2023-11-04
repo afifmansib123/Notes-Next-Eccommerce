@@ -7,6 +7,7 @@ const items = {
         slug: "ABC1",
         image: "/image1.png",
         quantity : 1,
+        instock : 4,
       },
       {
         name: "name2",
@@ -14,6 +15,7 @@ const items = {
         slug: "ABC2",
         image: "/image2.png",
         quantity : 1,
+        instock : 5,
       },
       {
         name: "name3",
@@ -21,6 +23,7 @@ const items = {
         slug: "ABC3",
         image: "/image3.png",
         quantity : 1,
+        instock : 6,
       },
       {
         name: "name4",
@@ -28,6 +31,7 @@ const items = {
         slug: "ABC4",
         image: "/image4.png",
         quantity : 1,
+        instock : 7,
       },
       {
         name: "name5",
@@ -35,6 +39,7 @@ const items = {
         slug: "ABC5",
         image: "/image5.png",
         quantity : 1,
+        instock : 8,
       },
       {
         name: "name6",
@@ -42,6 +47,7 @@ const items = {
         slug: "ABC6",
         image: "/image6.png",
         quantity : 1,
+        instock : 9,
       },
       {
         name: "name7",
@@ -49,6 +55,7 @@ const items = {
         slug: "ABC7",
         image: "/image7.png",
         quantity : 1,
+        instock : 10,
       },
     ]
 }

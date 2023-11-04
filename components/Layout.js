@@ -16,10 +16,9 @@ const Layout = ({title,children}) => {
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"/>
 
             </Head>
-            <header>
+            <header className="flex justify-center">
                 CART 
                 <a className="p-2">
-                  Cart
                   {cart.cartitems.length > 0 && (
                     <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
                       {cart.cartitems.reduce((a, c) => a + c.quantity, 0)}
@@ -31,7 +30,7 @@ const Layout = ({title,children}) => {
             <main>
             {children}
             </main>
-            <footer className="flex ml-20 items-center justify-center">
+            <footer className="flex justify-center">
                 created by @afif
             </footer>
         </div>
