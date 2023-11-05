@@ -2,12 +2,18 @@ import Head from "next/head"
 import { Store } from "@/utils/Store"
 import { useContext } from "react"
 import Link from "next/link"
+import { useState, useEffect } from "react"
 
 const Layout = ({title,children}) => {
 
     //call the state of the store
     const {state} = useContext(Store)
     const {cart} = state
+    const [cartitemscount, setcartitemscount] = useState(0)
+
+    useEffect(()=>{
+      setcartitemscount((cart.cartitems.reduce((a, c) => a + c.quantity, 0)))
+    },[cart.cartitems])
 
     return(
         <div>
@@ -19,9 +25,9 @@ const Layout = ({title,children}) => {
             <header className="flex justify-center">
                 CART 
                 <a className="p-2">
-                  {cart.cartitems.length > 0 && (
+                  {cartitemscount > 0 && (
                     <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
-                      {cart.cartitems.reduce((a, c) => a + c.quantity, 0)}
+                      {cartitemscount}
                     </span>
                   )}
                 </a>

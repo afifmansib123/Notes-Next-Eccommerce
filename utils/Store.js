@@ -1,12 +1,13 @@
 import { createContext, useReducer } from "react";
+import Cookies from "js-cookie";
 
 
 //initial cart with an empty string array
 //initial state is an empty object
 const initialstate = {
-    cart : {
-        cartitems : []
-    }
+    cart : Cookies.get('cart')?
+     JSON.parse(Cookies.get('cart'))
+     : {cartitems : []}
 }
 
 //reducer function to update cart items
@@ -20,6 +21,7 @@ export const reducer = (state,action) => {
             ? state.cart.cartitems.map((x)=>x.slug === existitem.slug ? newitem : x) //if the item is added to cart already just increase the count
             : [...state.cart.cartitems, newitem] //else add the item to the cart with the previous state existing
 
+            Cookies.set('cart', JSON.stringify({...state.cart, cartitems}))
             //have to return it now :
             return {...state, cart: {...state.cart, cartitems}}
         case "DELETE":
@@ -28,6 +30,8 @@ export const reducer = (state,action) => {
             console.log(state.cart.cartitems)
             const newcart = state.cart.cartitems.filter((x)=>x.slug!==reqslug)
             console.log(newcart)
+
+            Cookies.set('cart', JSON.stringify({cartitems : newcart}))
             return {...state, cart : {cartitems : newcart} }
             
             //console.log(newcart)
