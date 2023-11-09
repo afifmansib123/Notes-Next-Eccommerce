@@ -1,4 +1,12 @@
 const items = {
+  users : [
+    {
+      name : "afif",
+      role : "admin",
+      email : "afif@gmail.com",
+      password : "12345678"
+    }
+  ],
   names:
     [
       {

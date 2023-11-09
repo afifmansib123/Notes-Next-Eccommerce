@@ -1,7 +1,9 @@
 import Layout from '@/components/Layout'
 import Cards from '@/components/cards'
 import items from '@/utils/data'
+import { useRouter } from 'next/router'
 export default function Home() {
+  const router = useRouter()
 
   return (
     <>
@@ -12,6 +14,7 @@ export default function Home() {
           <Cards props={x} />
         ))
       }
+      <button onClick={()=>{router.push('/api/posttodatabase')}}>Post To Database</button>
       </div>
       </>
   )
