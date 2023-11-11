@@ -31,6 +31,7 @@ const Layout = ({title,children}) => {
                     </span>
                   )}
                 </a>
+               <Link legacyBehavior href="/userlogin">LOGIN</Link>
                 <Link href="/cartpage">Check cart</Link>
             </header>
             <main>

@@ -2,7 +2,7 @@ const items = {
   users : [
     {
       name : "afif",
-      role : "admin",
+      isadmin : true,
       email : "afif@gmail.com",
       password : "12345678"
     }
