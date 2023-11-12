@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
     <h1 className="flex justify-center">This is the Skeleton of an ecommerce website</h1><br/>
-    <div className='flex grid grid-cols-4  gap-4 md:grid-cols-4 lg:grid-cols-4 items-center'>
+    <div className='flex grid grid-cols-4  gap-4 md:grid-cols-4 lg:grid-cols-4 items-center' style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"1px solid white",padding:"10px", borderRadius: "4px"}}>
       {
         items.names.map((x)=>(
           <Cards props={x} />

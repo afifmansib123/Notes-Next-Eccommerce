@@ -39,11 +39,17 @@ function Loginscreen() {
 
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input defaultValue="e@gmail.com" {...register("email", { required: true })} />
-      <input defaultValue="***********" {...register("password", { required: true })} />
+    <form onSubmit={handleSubmit(onSubmit)}  className="flex flex-col items-center" style={{ fontSize: 20, color: "black", border: "3px solid white" }}>
+      <div style={{ fontSize: 20, color: "black", border: "3px solid black" }}>
+      <label>Email :</label>
+      <input defaultValue=""  {...register("email", { required: true })} />
+      </div>
+      <div style={{ fontSize: 20, color: "black", border: "3px solid black" }}>
+      <label>Password :</label>
+      <input defaultValue="" {...register("password", { required: true })} />
+      </div>
       {errors.password && <span>This field is required</span>}
-      <input type="submit" />
+      <input style={{ fontSize: 20, color: "red", border: "3px solid green" }} type="submit"  />
     </form>
   )
 }

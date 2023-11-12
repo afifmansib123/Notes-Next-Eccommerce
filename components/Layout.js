@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import { useSession, signOut } from "next-auth/react"
 import { Menu } from "@headlessui/react"
+import Cookies from "js-cookie"
 
 const Layout = ({title,children}) => {
 
@@ -20,9 +21,9 @@ const Layout = ({title,children}) => {
     const {status, data : session} =  useSession()
 
     const handlelogout = () => {
-      signOut({ callbackUrl: '/login' })
+      signOut({ callbackUrl: '/userlogin' }) 
       Cookies.remove('cart')
-      dispatch({type : 'CART_RESET'})
+      dispatch({type : "CART_RESET"})
   
     }
 
@@ -31,9 +32,10 @@ const Layout = ({title,children}) => {
             <Head>
             <title>{title? title : "Afif's revision"}</title>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"/>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"></link>
             </Head>
-            <header className="flex justify-center">
-                CART 
+            <header className="flex justify-center" style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"5px solid white",padding:"10px", borderRadius: "4px"}}>
+                <p  style={{ fontSize: 20, color: "black", whiteSpace: "nowrap" , border:"2px solid blue",padding:"10px", borderRadius: "4px"}}>CART</p>
                 <a className="p-2">
                   {cartitemscount > 0 && (
                     <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
@@ -41,14 +43,14 @@ const Layout = ({title,children}) => {
                     </span>
                   )}
                 </a>
-                <Link href="/cartpage">Check cart</Link>
+                <Link href="/cartpage" style={{ fontSize: 20, color: "black", whiteSpace: "nowrap" , border:"2px solid blue",padding:"10px", borderRadius: "4px"}}>Check cart</Link>
                 {status === 'loading'
           ? (<div>Loading</div>)
           : session?.user
             ? <Menu>
-              <Menu.Button>{session.user.name}</Menu.Button>
+              <Menu.Button style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"10px", borderRadius: "4px"}}>{session.user.name}</Menu.Button>
               <Menu.Items>
-                <Menu.Item>
+                <Menu.Item style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"1px", borderRadius: "1px"}}>
                   {({ active }) => (
                     <a
                       className={`${active && 'bg-blue-500'}`}
@@ -58,7 +60,7 @@ const Layout = ({title,children}) => {
                     </a>
                   )}
                 </Menu.Item><br />
-                <Menu.Item>
+                <Menu.Item style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"1px", borderRadius: "1px"}}>
                   {({ active }) => (
                     <a
                       className={`${active && 'bg-blue-500'}`}
@@ -68,7 +70,7 @@ const Layout = ({title,children}) => {
                     </a>
                   )}
                 </Menu.Item><br />
-                <Menu.Item>
+                <Menu.Item style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"1px", borderRadius: "1px"}}>
                   <a
 
                     href="#"
@@ -79,7 +81,7 @@ const Layout = ({title,children}) => {
                 </Menu.Item>
               </Menu.Items>
             </Menu>
-            : (<Link href={'/userlogin'}>LOGIN</Link>)
+            : (<Link href={'/userlogin'} style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"2px", borderRadius: "1px"}}>LOGIN</Link>)
         }
             </header>
             <main>

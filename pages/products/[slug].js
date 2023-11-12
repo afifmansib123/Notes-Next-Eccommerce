@@ -31,10 +31,10 @@ export default function Singles() {
 
 
     return (
-        <div className="flex justify-center">
-            <h1>{singleproduct.name}</h1>
+        <div className="flex flex-col items-center" style={{ fontSize: 20, color: "white", border: "1px solid white" }}>
+            <h1  style={{ backgroundColor: "#203F9F", fontSize: 25, color: "white" }}>{singleproduct.name}</h1>
             <Image src={singleproduct.image} alt="hello" height={500} width={500}></Image>
-            <button style={{color:"red"}} onClick={Addtocart}>add to cart</button>
+            <button onClick={Addtocart} style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"1px", borderRadius: "1px"}}>add to cart</button>
         </div>
     )
 
