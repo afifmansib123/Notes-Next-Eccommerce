@@ -30,5 +30,18 @@ async function connect(){
         }
       }
 
-      const db = { connect, disconnect };
+      function convertDocToObj(doc) {
+        if (doc && doc._id) {
+          doc._id = doc._id.toString();
+        }
+        if (doc && doc.createdAt) {
+          doc.createdAt = doc.createdAt.toString();
+        }
+        if (doc && doc.updatedAt) {
+          doc.updatedAt = doc.updatedAt.toString();
+        }
+        return doc;
+      }
+
+      const db = { connect, disconnect, convertDocToObj };
       export default db;

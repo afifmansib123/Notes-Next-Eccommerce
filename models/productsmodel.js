@@ -9,6 +9,6 @@ const ProductSchema = new mongoose.Schema({
     instock : {type : Number, required : false},
   })
 
-const Product = mongoose.model.Product || mongoose.model('Product', ProductSchema)
+const Product = mongoose.models.Product || mongoose.model('Product', ProductSchema)
 
 export default Product

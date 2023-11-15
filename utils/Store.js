@@ -37,8 +37,7 @@ export const reducer = (state,action) => {
             //console.log(newcart)
             //return {...state, cart : {...state.cart, }}
         case "CART_RESET":
-            Cookies.remove('cart')
-            return {cart : {cartitems : []}}
+            return {...state, cart : {cartitems : []}}
         default:
             return state
     }
