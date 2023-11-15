@@ -1,22 +1,21 @@
-import items from "@/utils/data"
-
-
+import Product from "@/models/productsmodel"
+import db from "@/utils/db"
+import axios from "axios"
 import { useRouter } from "next/router"
-
 import Image from "next/image"
 import { Store } from "@/utils/Store"
 import { useContext } from "react"
 
-export default function Singles() {
+export default function Singles(props) {
 
     const {query} = useRouter()
     const {slug} = query
 
     const { state, dispatch } = useContext(Store)
 
-    const singleproduct = items.names.find((x)=>x.slug === slug)
+    const {singleproduct} = props
 
-    const Addtocart = () => {
+    const Addtocart = async () => {
         //find the same of this id from the cart and see
         //if it exists already or not
         const existitem = state.cart.cartitems.find((x) => x.slug === singleproduct.slug)
@@ -40,3 +39,17 @@ export default function Singles() {
 
 
 }
+
+export async function getServerSideProps(context) {
+    const { params } = context;
+    const { slug } = params;
+
+    await db.connect();
+    const product = await Product.findOne({ slug }).lean();
+    await db.disconnect();
+    return {
+      props: {
+        singleproduct: product ? db.convertDocToObj(product) : null,
+      },
+    };
+  }
