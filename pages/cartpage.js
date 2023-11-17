@@ -1,6 +1,8 @@
 import { Store } from "@/utils/Store"
 import { useContext } from "react"
 import dynamic from "next/dynamic"
+import Image from "next/image"
+import Link from "next/link"
 function cartpage() {
     const { state, dispatch } = useContext(Store)
     let pricecount = 0
@@ -18,6 +20,7 @@ function cartpage() {
                     <tbody>
                         {state.cart.cartitems.map((items) => (
                             <tr key={items.slug}>
+                                <td style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"1px", borderRadius: "1px"}}><Image src={items.image} alet="hi" width="100" height="100"></Image></td>
                                 <td style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"1px", borderRadius: "1px"}}>{items.name}</td>
                                 <td style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"1px", borderRadius: "1px"}}>{items.price}</td>
                                 <td style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"1px", borderRadius: "1px"}}>{items.quantity}</td>
@@ -50,6 +53,9 @@ function cartpage() {
                         pricecount = pricecount + (price * quantity)
                     })}
                     <span>({pricecount})</span>
+                </div>
+                <div className="flex justify-center" style={{ fontSize: 20, color: "orange", whiteSpace: "nowrap" , border:"2px solid black",padding:"1px", borderRadius: "1px"}}>
+                    <Link href="/shippingadress">Proceed</Link>
                 </div>
             </div>
         </>
