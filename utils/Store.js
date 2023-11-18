@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 const initialstate = {
     cart : Cookies.get('cart')?
      JSON.parse(Cookies.get('cart'))
-     : {cartitems : []}
+     : {cartitems : [], shippingadress : {}}
 }
 
 //reducer function to update cart items
@@ -38,6 +38,17 @@ export const reducer = (state,action) => {
             //return {...state, cart : {...state.cart, }}
         case "CART_RESET":
             return {...state, cart : {cartitems : []}}
+        case "SHIPPINGADD":
+            return{
+                ...state,
+                cart: {
+                    ...state.cart,
+                    shippingadress : {
+                        ...(state.cart.shippingadress || {}),
+                        ...action.payload,
+                    }
+                }
+            }
         default:
             return state
     }
