@@ -61,7 +61,7 @@ const shippingadress = () => {
                 <input {...register("country", { required: true })} />
                 {errors.country && <span>This field is required</span>}
 
-                <button type="submit">go to payment</button>
+                <button type="submit">make order</button>
             </form>
 
         </div>
