@@ -20,11 +20,11 @@ const shippingadress = () => {
     const router = useRouter()
 
     useEffect(() => {
-        setValue('housenumber', shippingadress.housenumber)
-        setValue('street', shippingadress.street)
-        setValue('state', shippingadress.state)
-        setValue('province', shippingadress.province)
-        setValue('country', shippingadress.country)
+        setValue('housenumber', shippingadress.housenumber || '')
+        setValue('street', shippingadress.street || '')
+        setValue('state', shippingadress.state || '')
+        setValue('province', shippingadress.province || '')
+        setValue('country', shippingadress.country || '')
     }, [setValue, shippingadress])
 
     const submitinformation = ({ housenumber, street, state, province, country }) => {
