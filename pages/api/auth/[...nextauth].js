@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import User from "@/models/usermodel"
 import db from "@/utils/db"
+import GoogleProvider from "next-auth/providers/google";
 
 export default NextAuth({
     session: {
@@ -40,7 +41,11 @@ export default NextAuth({
                 }
                 console.log('user not found')
             }
-        })
+        }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET
+          })
     ]
 
 })

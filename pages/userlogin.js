@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form"
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { GoogleButton } from "@/components/googlebutton";
 
 function Loginscreen() {
 
@@ -39,6 +40,7 @@ function Loginscreen() {
 
 
   return (
+    <>
     <form onSubmit={handleSubmit(onSubmit)}  className="flex flex-col items-center" style={{ fontSize: 20, color: "black", border: "3px solid white" }}>
       <div style={{ fontSize: 20, color: "black", border: "3px solid black" }}>
       <label>Email :</label>
@@ -51,6 +53,8 @@ function Loginscreen() {
       {errors.password && <span>This field is required</span>}
       <input style={{ fontSize: 20, color: "red", border: "3px solid green" }} type="submit"  />
     </form>
+    <GoogleButton />
+    </>
   )
 }
 
