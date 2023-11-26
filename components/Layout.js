@@ -36,6 +36,7 @@ const Layout = ({title,children}) => {
             </Head>
             <header className="flex justify-center" style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"5px solid white",padding:"10px", borderRadius: "4px"}}>
                 <p  style={{ fontSize: 20, color: "black", whiteSpace: "nowrap" , border:"2px solid blue",padding:"10px", borderRadius: "4px"}}>CART</p>
+                <Link href="/registeruser" style={{ fontSize: 20, color: "black", whiteSpace: "nowrap" , border:"2px solid blue",padding:"10px", borderRadius: "4px"}}>REGISTER USER</Link>
                 <a className="p-2">
                   {cartitemscount > 0 && (
                     <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
