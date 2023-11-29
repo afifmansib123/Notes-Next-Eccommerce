@@ -7,7 +7,7 @@ const orderSchema = new mongoose.Schema({
       _id : { type: String, required: false },
       createdAt: { type: String, required: false },
       name: { type: String, required: false },
-      price: { type: String, required: false },
+      price: { type: Number, required: false },
       slug: { type: String, required: false },
       image: { type: String, required: false },
       quantity: { type: Number, required: false },
@@ -21,6 +21,7 @@ const orderSchema = new mongoose.Schema({
       province: { type: String, required: false },
       country: { type: String, required: false },
     },
+    totalprice : {type : Number, required: false},
 });
 
 const Order = mongoose.models.Order || mongoose.model('Order', orderSchema);

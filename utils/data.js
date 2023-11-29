@@ -11,7 +11,7 @@ const items = {
     [
       {
         name: "name1",
-        price: "20$",
+        price: 20,
         slug: "ABC1",
         image: "/image1.png",
         quantity : 1,
@@ -19,7 +19,7 @@ const items = {
       },
       {
         name: "name2",
-        price: "50$",
+        price: 50,
         slug: "ABC2",
         image: "/image2.png",
         quantity : 1,
@@ -27,7 +27,7 @@ const items = {
       },
       {
         name: "name3",
-        price: "210$",
+        price: 210,
         slug: "ABC3",
         image: "/image3.png",
         quantity : 1,
@@ -35,7 +35,7 @@ const items = {
       },
       {
         name: "name4",
-        price: "2110$",
+        price: 2110,
         slug: "ABC4",
         image: "/image4.png",
         quantity : 1,
@@ -43,7 +43,7 @@ const items = {
       },
       {
         name: "name5",
-        price: "710$",
+        price: 710,
         slug: "ABC5",
         image: "/image5.png",
         quantity : 1,
@@ -51,7 +51,7 @@ const items = {
       },
       {
         name: "name6",
-        price: "010$",
+        price: 10,
         slug: "ABC6",
         image: "/image6.png",
         quantity : 1,
@@ -59,7 +59,7 @@ const items = {
       },
       {
         name: "name7",
-        price: "010$",
+        price: 10,
         slug: "ABC7",
         image: "/image7.png",
         quantity : 1,

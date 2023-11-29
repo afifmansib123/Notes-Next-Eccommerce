@@ -5,12 +5,13 @@ export default async function handler(req, res) {
     db.connect();
       if (req.method === 'POST') {
         try {
-          const { user, cartitems, shippingadress } = req.body;
+          const { user, cartitems, shippingadress, totalprice } = req.body;
     
           const newOrder = new Order({
             user,
             cartitems,
             shippingadress,
+            totalprice,
           });
     
           const savedOrder = await newOrder.save();

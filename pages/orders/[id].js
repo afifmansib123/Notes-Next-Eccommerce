@@ -13,6 +13,7 @@ export default function singleitem() {
         user: "",
         cartitems: [],
         shippingadress: {},
+        totalprice : 0,
     })
 
     useEffect(() => {
@@ -41,9 +42,11 @@ export default function singleitem() {
                         <p>Name: {x.name}</p>
                         <p>Price: {x.price}</p>
                         <p>Quantity: {x.quantity}</p>
+                        
                     </div>
                 ))}
-            </div>
+            </div><br/>
+            <p>Totalprice : {data.totalprice}</p>
         </div>
     )
 }

@@ -3,7 +3,7 @@ import { Store } from "@/utils/Store"
 import axios from "axios"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/router"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 
 const test = () => {
     const { state, dispatch } = useContext(Store)
@@ -17,11 +17,24 @@ const test = () => {
     const shippingadress = cart.shippingadress
     const cartitems = cart.cartitems
 
+
+    let [totalprice, changeprice] = useState()
+
+    useEffect(()=>{
+        let sendprice = 0
+        cart.cartitems.map((x)=>{
+            sendprice = sendprice + (x.price * x.quantity)
+            changeprice(sendprice)
+        })
+        
+    },[cartitems])
+
+    console.log(totalprice)
     const ordersummary = {
         user,
         cartitems,
         shippingadress,
-
+        totalprice,
     }
 
     const createorder = async () => {
@@ -35,10 +48,12 @@ const test = () => {
     return (
         <div>
             <Checkoutwizard activestep={3} />
+            <div className="flex justify-center">
             <h1>Here's a summary of your order</h1>
-            <p>{JSON.stringify(ordersummary.user)}</p>
-            <span>{JSON.stringify(ordersummary)}</span>
+            <p>Name : {user}</p>
+            <p className="flex justify-center ml-20">totalprice : {totalprice}</p>
             <button style={{color: "green"}} onClick={createorder}>Make Order</button>
+            </div>
         </div>
     )
 }
