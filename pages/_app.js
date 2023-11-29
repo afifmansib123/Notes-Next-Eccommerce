@@ -20,9 +20,9 @@ export default function App({ Component, pageProps: {session, ...pageProps} }) {
   )
 }
 
-function Authcheck({children}){
+function Authcheck({children, admincheckvariable}){
   const router = useRouter()
-  const status = useSession({
+  const {status, data : session} = useSession({
     required : true,
     onUnauthenticated(){
       router.push('unauthoeized?/login')

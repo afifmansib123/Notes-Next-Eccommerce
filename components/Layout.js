@@ -45,19 +45,23 @@ const Layout = ({title,children}) => {
                   )}
                 </a>
                 <Link href="/cartpage" style={{ fontSize: 20, color: "black", whiteSpace: "nowrap" , border:"2px solid blue",padding:"10px", borderRadius: "4px"}}>Check cart</Link>
-                {status === 'loading'
-          ? (<div>Loading</div>)
+         {status === 'loading' ?
+          (<div>Loading</div>)
+
+          //// already loaded section
           : session?.user
-            ? <Menu>
+            ?
+            session?.user?.isadmin === true ?
+            <Menu>
               <Menu.Button style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"10px", borderRadius: "4px"}}>{session.user.name}</Menu.Button>
               <Menu.Items>
                 <Menu.Item style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"1px", borderRadius: "1px"}}>
                   {({ active }) => (
                     <a
                       className={`${active && 'bg-blue-500'}`}
-                      href="/profile"
+                      href="/admin/admindashboard"
                     >
-                      Profile
+                      Admin Dahboard
                     </a>
                   )}
                 </Menu.Item><br />
@@ -65,23 +69,39 @@ const Layout = ({title,children}) => {
                   {({ active }) => (
                     <a
                       className={`${active && 'bg-blue-500'}`}
-                      href="/dashboard"
+                      onClick={handlelogout}
                     >
-                      Dashbooard
+                      Signout
                     </a>
                   )}
                 </Menu.Item><br />
-                <Menu.Item style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"1px", borderRadius: "1px"}}>
+                </Menu.Items>
+            </Menu> :
+            <Menu>
+            <Menu.Button style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"10px", borderRadius: "4px"}}>{session.user.name}</Menu.Button>
+            <Menu.Items>
+              <Menu.Item style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"1px", borderRadius: "1px"}}>
+                {({ active }) => (
                   <a
-
-                    href="#"
-                    onClick={handlelogout} //MAIN SIGN OUT FUNCTIONALITY 
+                    className={`${active && 'bg-blue-500'}`}
+                    href="/profile"
                   >
-                    Sign out
+                    User Profile
                   </a>
-                </Menu.Item>
+                )}
+              </Menu.Item><br />
+              <Menu.Item style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"1px", borderRadius: "1px"}}>
+                  {({ active }) => (
+                    <a
+                      className={`${active && 'bg-blue-500'}`}
+                      onClick={handlelogout}
+                    >
+                      Signout
+                    </a>
+                  )}
+                </Menu.Item><br />
               </Menu.Items>
-            </Menu>
+          </Menu>
             : (<Link href={'/userlogin'} style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"2px", borderRadius: "1px"}}>LOGIN</Link>)
         }
             </header>
