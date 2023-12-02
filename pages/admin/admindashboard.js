@@ -13,6 +13,8 @@ const admindashboard = () => {
 
     const [summarydata, changedata] = useState()
 
+    const [allproduct, chageallproducts] = useState([])
+
     useEffect(() => {
         const fetchdata = async () => {
             console.log("Inside useEffect");
@@ -23,6 +25,8 @@ const admindashboard = () => {
                     setloading(false)
                     const fetcheddata = await axios.get("/api/admin/summary")
                     changedata(fetcheddata.data)
+                    const fetchproducts = await axios.get("/api/admin/allproducts")
+                    chageallproducts(fetchproducts.data)
                 }
                 console.log("Is Admin:", session?.user?.isadmin);
             } else if (status === "loading") {
@@ -40,6 +44,7 @@ const admindashboard = () => {
     }
 
     console.log('fetch data', summarydata)
+    console.log('fetch all products', allproduct)
 
     return (
         <div className="flex justify-center">
@@ -56,7 +61,14 @@ const admindashboard = () => {
                      :<p>No products</p>   
                 }
 
-            
+        <p>Below is the List of All Products</p>
+        <ul>
+                {allproduct.map((product, index) => (
+                    <li key={index}>
+                        ID: {product._id}, Name: {product.name}
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 }
