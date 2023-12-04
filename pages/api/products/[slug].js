@@ -4,30 +4,48 @@ import db from "@/utils/db";
 import Product from "@/models/productsmodel";
 
 export default async function handler(req, res) {
-  if (req.method !== "PUT") {
-    return res.status(405).json({ message: "Method Not Allowed" });
-  }
 
-  const { slug } = req.query;
-  const { name, price } = req.body;
+    const { slug } = req.query;
 
-  try {
-    await db.connect();
 
-    const updatedProduct = await Product.findOneAndUpdate(
-      { slug },
-      { $set: { name, price } },
-      { new: true }
-    );
+    if (req.method === "PUT") {
+        const { name, price } = req.body;
+        try {
+            await db.connect();
 
-    await db.disconnect();
+            const updatedProduct = await Product.findOneAndUpdate(
+                { slug },
+                { $set: { name, price } },
+                { new: true }
+            );
 
-    if (!updatedProduct) {
-      return res.status(404).json({ message: "Product not found" });
+            await db.disconnect();
+
+            if (!updatedProduct) {
+                return res.status(404).json({ message: "Product not found" });
+            }
+
+            return res.status(200).json({ message: "Product updated successfully", updatedProduct });
+        } catch (error) {
+            return res.status(500).json({ message: "Server Error", error: error.message });
+        }
+    } else if (req.method === "DELETE") {
+        try {
+            await db.connect()
+
+            const deletedProduct = await Product.findOneAndDelete({ slug })
+            await db.disconnect();
+
+            if (!deletedProduct) {
+                return res.status(404).json({ message: "Product not found" });
+            }
+
+            return res.status(200).json({ message: "Product deleted successfully" });
+        } catch (err) {
+            return res.status(500).json({ message: "Server Error", error: error.message });
+        }
+    } else {
+        // Handle other HTTP methods
+        return res.status(405).json({ message: "Method Not Allowed" });
     }
-
-    return res.status(200).json({ message: "Product updated successfully", updatedProduct });
-  } catch (error) {
-    return res.status(500).json({ message: "Server Error", error: error.message });
-  }
 }

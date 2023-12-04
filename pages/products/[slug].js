@@ -57,6 +57,15 @@ export default function Singles(props) {
     }
   };
 
+  const deletemyproduct = async () => {
+    try{
+      const response = await axios.delete(`/api/products/${singleproduct.slug}`)
+      console.log(response.data)
+    }catch(error){
+      console.log(error)
+    }
+  }
+
   return (
     <div className="flex flex-col items-center" style={{ fontSize: 20, color: "black", border: "1px solid white" }}>
       <h1 style={{ backgroundColor: "#203F9F", fontSize: 25, color: "white" }}>{singleproduct.name}</h1>
@@ -68,6 +77,7 @@ export default function Singles(props) {
       <label>New Price</label>
       <input onChange={(e) => { changeeditprice(e.target.value) }}></input>
       <button onClick={editmyProduct} style={{ fontSize: 20, color: "red", whiteSpace: "nowrap", border: "2px solid black", padding: "1px", borderRadius: "1px" }}>Edit Product</button>
+      <button onClick={deletemyproduct} style={{ fontSize: 20, color: "red", whiteSpace: "nowrap", border: "2px solid black", padding: "1px", borderRadius: "1px" }}>Delete Product</button>
     </div>
   )
 
