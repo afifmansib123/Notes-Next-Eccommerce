@@ -2,6 +2,7 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Link from "next/link";
 
 const admindashboard = () => {
     const { status, data: session } = useSession();
@@ -65,7 +66,9 @@ const admindashboard = () => {
         <ul>
                 {allproduct.map((product, index) => (
                     <li key={index}>
+                      <Link href = {`/products/${(product.slug)}`}>
                         ID: {product._id}, Name: {product.name}
+                      </Link>
                     </li>
                 ))}
             </ul>

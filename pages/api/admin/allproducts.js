@@ -12,7 +12,7 @@ const handler = async (req,res) => {
     await db.connect()
 
     try{
-        const products = await Product.find({}, '_id name')
+        const products = await Product.find({}, '_id name slug')
         await db.disconnect()
         res.status(200).json(products)
     }catch(err){
