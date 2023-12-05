@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { useSession, signOut } from "next-auth/react"
 import { Menu } from "@headlessui/react"
 import Cookies from "js-cookie"
+import { useRouter } from "next/router"
 
 const Layout = ({title,children}) => {
 
@@ -27,6 +28,13 @@ const Layout = ({title,children}) => {
   
     }
 
+    const [query, setquery] = useState('')
+    const router = useRouter()
+
+    const handlesearch = (event) => {
+      event.preventDefault()
+      router.push(`/search?query=${query}`)
+    }
     return(
         <div>
             <Head>
@@ -104,6 +112,10 @@ const Layout = ({title,children}) => {
           </Menu>
             : (<Link href={'/userlogin'} style={{ fontSize: 20, color: "blue", whiteSpace: "nowrap" , border:"2px solid black",padding:"2px", borderRadius: "1px"}}>LOGIN</Link>)
         }
+        <form>
+             <input onChange={(e)=>{setquery(e.target.value)}}></input>
+             <button type = "submit" onClick={handlesearch}>Search</button>
+            </form>
             </header>
             <main>
             {children}
