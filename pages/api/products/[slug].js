@@ -44,7 +44,22 @@ export default async function handler(req, res) {
         } catch (err) {
             return res.status(500).json({ message: "Server Error", error: error.message });
         }
-    } else {
+    } else if (req.method === "POST"){
+        try{
+            await db.connect()
+            const {name, price, slug, image, categoty, quantity, instock} = req.body
+
+            const newproduct = new Product({
+                name, price, slug, image, categoty, quantity, instock,
+            })
+            const saveproduct = await newproduct.save()
+            res.status(201).json(saveproduct);
+        }catch(error){
+            alert(error)
+        }
+    }
+    
+    else {
         // Handle other HTTP methods
         return res.status(405).json({ message: "Method Not Allowed" });
     }

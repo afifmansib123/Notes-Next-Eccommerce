@@ -38,7 +38,14 @@ export default function productuploader() {
     }
 
     const { register, handleSubmit, setValue } = useForm()
-    const onSubmit = (data) => alert(JSON.stringify(data))
+    const onSubmit = async (data) => {
+        try {
+            const response = await axios.post("/api/products/slug", data)
+            //alert(JSON.stringify(data))
+        } catch (err) {
+            alert('error')
+        }
+    }
 
     const uploadHandler = async (e, imageField = 'image') => {
         const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`
@@ -61,20 +68,19 @@ export default function productuploader() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
+            <label>Name</label>
             <input {...register("name")} />
-            <input {...register("price")} />
+            <label>price</label>
+            <input type="number" {...register("price", { valueAsNumber: true })} />
+            <label>slug</label>
             <input {...register("slug")} />
-            <input {...register("image")} />
-            <input {...register("catergory")} />
             <div className="mb-4">
                 <label htmlFor="image">image</label>
                 <input
                     type="text"
                     className="w-full"
                     id="image"
-                    {...register('image', {
-                        required: 'Please enter image',
-                    })}
+                    {...register('image')}
                 />
             </div>
             <div className="mb-4">
@@ -87,6 +93,12 @@ export default function productuploader() {
                     onChange={uploadHandler}
                 />
             </div>
+            <label>category</label>
+            <input {...register("category")} />
+            <label>quantity</label>
+            <input {...register("quantity", { valueAsNumber: true })} />
+            <label>instock</label>
+            <input {...register("instock", { valueAsNumber: true })} />
             <input type="submit" />
         </form>
     )
