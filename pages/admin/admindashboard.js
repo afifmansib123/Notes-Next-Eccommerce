@@ -72,6 +72,7 @@ const admindashboard = () => {
                     </li>
                 ))}
             </ul>
+            <Link href = "uploadproducts">Upload New Item</Link>
         </div>
     );
 }
